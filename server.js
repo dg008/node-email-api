@@ -36,7 +36,7 @@ app.post('/sendEmail', function (req, res) {
 
   var emailBody = {
     from: from,
-    to: 'dgeorgy@gmail.com',  // TODO: for now hard-coding To email
+    to: to,
     subject: subject,
     text: message
   };
@@ -95,13 +95,13 @@ function sendEmailViaBackupAPI(req, res) {
         {
            "to":[
               {
-                 "email":"dgeorgy@gmail.com"
+                 "email":to
               }
            ]
         }
      ],
      "from":{
-        "email": "dgeorgy@gmail.com"
+        "email": from
      },
      "subject": "Send Grid",
      "content": [
@@ -117,16 +117,15 @@ function sendEmailViaBackupAPI(req, res) {
         {
            "to":[
               {
-                 "email":"dgeorgy@gmail.com"
+                 "email":to
               }
            ]
         }
      ],
      "from":{
-        // "email": from
-        "email": "dgeorgy@gmail.com"
+        "email": from
      },
-     "subject": "Send Grid",// + subject,
+     "subject": "Send Grid" + subject,
      "content": [
         {
            "type":"text/plain",
