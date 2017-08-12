@@ -90,28 +90,6 @@ function sendEmailViaBackupAPI(req, res) {
 
   console.log('from in backup method', from);
 
-  var emailBody2 = {
-     "personalizations":[
-        {
-           "to":[
-              {
-                 "email":to
-              }
-           ]
-        }
-     ],
-     "from":{
-        "email": from
-     },
-     "subject": "Send Grid",
-     "content": [
-        {
-           "type":"text/plain",
-           "value": "message"
-        }
-     ]
-  };
-
   var emailBody = {
      "personalizations":[
         {
@@ -129,8 +107,7 @@ function sendEmailViaBackupAPI(req, res) {
      "content": [
         {
            "type":"text/plain",
-          //  "value": message
-          "value": "Send Grid msg"
+           "value": message
         }
      ]
   };
@@ -147,7 +124,7 @@ function sendEmailViaBackupAPI(req, res) {
       'Authorization': 'Bearer ' + sendGridApiKey,
       'content-type': 'application/json'
     },
-    body: emailBody2
+    body: emailBody
   };
 
   fetch(sendGridUrl, emailOptions)
