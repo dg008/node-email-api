@@ -142,6 +142,8 @@ function sendEmailViaBackupAPI(req, res) {
       });
 }
 
-app.listen(port);
+app.listen(port, function() {
+    console.log("App is running on port " + port);
+});
 
 console.log('todo list RESTful API server started on: ' + port);
