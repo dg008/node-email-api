@@ -10,7 +10,9 @@ This is a simple api built with node which provides an abstraction between two d
 MAIL_GUN_API_KEY=<YOUR_KEY_REMOVE_ANGLE_BRACKETS>
 SEND_GRID_API_KEY=<YOUR_KEY_REMOVE_ANGLE_BRACKETS>
 ```
-3. Create a simple POST request to http://localhost:3000/sendEmail using the following json:
+3. Run using 'npm run dev'.
+
+4. Create a simple POST request to http://localhost:3000/sendEmail using the following json:
 ```
 {
   "from": "hello@email.com",
@@ -29,7 +31,7 @@ NOTE: Content-Type header should be 'application/json'
 - API Call to SendGrid fails with a Bad Request (no other info given) - SO Question created (https://stackoverflow.com/questions/45613599/sendgrid-using-nodejs-with-fetch-400-bad-request)
 - BCC and CC are not being passed to SendGrid API request
 - If multiple To addresses are added (comma separated); The SendGrid API call will fail
-- Code needs to be refactored - too much logic in server.js
 - Test cases needed
 - Improve Error Handling
 - Input validation
+- If there's an actual network error (for eg. with SendGrid) - error received 'UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: Can't set headers after they are sent.'
