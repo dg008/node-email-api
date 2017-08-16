@@ -28,10 +28,11 @@ NOTE: Content-Type header should be 'application/json'
 
 # TODO
 
-- API Call to SendGrid fails with a Bad Request (no other info given) - SO Question created (https://stackoverflow.com/questions/45613599/sendgrid-using-nodejs-with-fetch-400-bad-request)
 - BCC and CC are not being passed to SendGrid API request
 - If multiple To addresses are added (comma separated); The SendGrid API call will fail
 - Test cases needed
 - Improve Error Handling
-- Input validation
+- Input validation (Partial)
+  - This needs to be re-thought; some validation seems to be handled by mailGun (eg. from address must be a valid email)
 - If there's an actual network error (for eg. with SendGrid) - error received 'UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: Can't set headers after they are sent.'
+  - Maybe we need to actually 'return' from the nodejs express method when sending back a status due to validation, etc..
