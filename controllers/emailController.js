@@ -6,11 +6,21 @@ require('dotenv').config();
 var mailGunApiKey = process.env.MAIL_GUN_API_KEY;
 var mailgunUrl = 'https://api:' + mailGunApiKey + '@api.mailgun.net/v3/sandbox5acf4bc5ddf6420489cb457ff1926058.mailgun.org/messages';
 
+// var emailRegex = new RegExp("/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/");
+var emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 exports.email_send = function(req, res) {
 
   var from = req.body.from;
   if (!from)
     res.status(400).send("'from' is required");
+  console.log('emailRegex', emailRegex.test(from));
+  if (emailRegex.test(from) === false){
+    console.log('regex if inside')
+    res.status(400).send("'from' must be a valid email address");
+  }
+  console.log('regex if outside')
+
   var to = req.body.to;
   if (!to)
       res.status(400).send("'to' is required");
@@ -115,17 +125,17 @@ function sendEmailViaBackupAPI(req, res) {
       'Authorization': 'Bearer ' + sendGridApiKey,
       'content-type': 'application/json'
     },
-    body: emailBody
+    body: JSON.stringify(emailBody)
   };
 
   fetch(sendGridUrl, emailOptions)
       .then(function(res) {
           console.log(res);
           console.log(res.statusText);
-          return res.json();
-      }).then(function(json) {
-          console.log('send grid json');
-          res.send(json);
+          return res.text();
+      }).then(function(text) {
+          console.log('send grid text');
+          res.send(text);
       }).catch(function(error, response, body) {
           console.log(error);
           console.log('network error sending sendGrid email');
